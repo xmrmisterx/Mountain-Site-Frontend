@@ -1,0 +1,16 @@
+-alright, so we copied most everything over from the public html page; we have the Procfile, the package.json, etc.
+-we've also set the server to basically just run the home route (app.use("/")) which renders index, and hopfeully that finds index.html
+and not index.js lol, bc that code is inside index.js
+-one thing that might cause the app to not work, is that they are using "app.use(express.static(_dirname + "/public"))" and we haven'that
+created that yet, mainly because we're unsure of our directory
+-ok, so we go to log in to heroku so we can test the local host site, but it ways invalid credentials, so we google it and then try to 
+log in from the browser, but this says IP address mismatch lol, let's try logging into the CiscoAnytime connect and see if that changes
+anything. Lol, I think it turns out we are using the wrong password. It's actually our school password, and its the new school password,
+so annoying
+-so, we type in "heroku local web" and we get this error "[WARN] Required Key 'web' Does Not Exist in Procfile Definition", which we've
+never even seen before. So apparently the "web" part of heroku local web actually means something, and is different from the "worker"
+that we have in our Procfile, so that's why it doesn't work. When we just type "heroku local", we don't get that error, but now it says
+we don't have axios, so we have to "npm i axios" to install it. Let's add the gitignore since that downloaded the node modules
+-interesting, so now we are getting the address in use error, which I think we've gotten before but the website still worked when we
+deployed it, let's look at the previous notes and see what it says. Yeah, rereading our notes from last time, we did get this address in
+use, but when we deployed it, it worked, so, let's try to deploy it I guess
