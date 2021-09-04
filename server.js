@@ -1,12 +1,10 @@
-// const { urlencoded } = require('body-parser');
-// const { query } = require('express');
 var express = require('express');
-// const https = require('https');
 var CORS = require('cors');
-const crypto = require('crypto');
 const axios = require('axios');
 
 var app = express();
+
+// set port for "heroku local" testing, bc the "var port = process.env.PORT || 8080" port doesn't work locally
 
 // app.set('port', 5125);
 

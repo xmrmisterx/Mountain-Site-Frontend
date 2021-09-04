@@ -47,10 +47,8 @@ An international highway between Chile and Argentina runs north of the mountain.
     <link rel="stylesheet" href="styles.css">
     <script>
 
-      proxy = "https://warm-taiga-26874.herokuapp.com/";
-
       var req = new XMLHttpRequest;
-      req.open("GET", proxy + "https://salty-plains-18308.herokuapp.com/Ojos_del_Salado", false);
+      req.open("GET", "https://salty-plains-18308.herokuapp.com/Ojos_del_Salado", false);
       req.send(null);
       img_url = req.responseText;
       document.getElementById("Img").src = img_url;
