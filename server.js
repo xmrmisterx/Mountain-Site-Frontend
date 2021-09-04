@@ -7,151 +7,27 @@ const crypto = require('crypto');
 const axios = require('axios');
 
 var app = express();
+
 // app.set('port', 5125);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(CORS());
 
 // set port for heroku
 
-// var host = '0.0.0.0';
 var port = process.env.PORT || 8080
 app.set('port', port);
 
-// set express to use everything in mountain site frontend path as public, to display the html and css
+// set express to use all the front end files (html, css) in the public folder
 
-app.use(express.static('~/Mountain_Site_FrontEnd' + '/public'));
+app.use(express.static(__dirname + "/public"));
 
 // render homepage when website is visited
 
 app.get("/", function(req, res) {
   res.render("index");
 });
-
-// // set global variables
-
-// var item_number = 0;
-// var img_url = '';
-// // var query_str = '';
-
-// // app.get('/:str', (req, res) => {
-
-// //   query_str = req.params.str;
-// //   console.log("query string: " + query_str);
-
-// //   https.get("https://en.wikipedia.org/w/api.php?action=query&titles=" + query_str + "&prop=pageimages&format=json&formatversion=2&pithumbsize=300", (resp) => {
-// //     let data = '';
-
-// //     // A chunk of data has been received.
-// //     resp.on('data', (chunk) => {
-// //       data += chunk;
-// //     });
-
-// //     // The whole response has been received. Print out the result.
-// //     resp.on('end', () => {
-// //       // console.log("data: " + data);
-// //       parsed_JSON = JSON.parse(data);
-// //       // console.log("parsed_JSON: " + parsed_JSON);
-// //       var img_url = parsed_JSON.query.pages[0].thumbnail.source;
-// //       console.log("image url: " + img_url);
-// //       res.send(img_url);
-// //     });
-
-// //   }).on("error", (err) => {
-// //     console.log("Error: " + err.message);
-// //   });
-// // });
-
-// // app.use(function(req,res){
-// //   res.status(404);
-// //   res.render('404');
-// // });
-
-// // app.use(function(err, req, res, next){
-// //   console.error(err.stack);
-// //   res.status(500);
-// //   res.render('500');
-// // });
-
-// // app.listen(app.get('port'), function(){
-// //   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
-// // });
-
-// app.get('/:str', (req, res) => {
-
-//   query_str = req.params.str;
-//   // console.log("query string: " + query_str);
-
-//   // if (query_str == 'school'){
-//   //   img_url = "https://commons.wikimedia.org/w/thumb.php?width=400&f=Larkmead_School,_Abingdon,_Oxfordshire.png";
-//   //   // console.log("img url inside getImageName function: " + img_url);
-//   //   res.send(img_url);
-//   //   return;
-//   // }
-
-//   (async () => {
-//     try {
-//       const response = await axios.get("https://en.wikipedia.org/w/api.php?action=query&prop=pageprops&titles=" + query_str + "&format=json&formatversion=2");
-//       item_number = response.data.query.pages[0].pageprops.wikibase_item;
-//       // console.log("item number right after get request response:", item_number);
-
-//     } catch (error) {
-//       console.log(error.response);
-//     }
-
-//     // console.log("item number outside get request response after setting value:", item_number);
-
-//     try {
-//       const response = await axios.get("https://www.wikidata.org/w/api.php?action=wbgetclaims&property=P18&entity=" + item_number + "&format=json");
-//       // console.log("GET image response: " + response);
-//       let image_name = response.data.claims.P18[0].mainsnak.datavalue.value;
-//       // console.log("image name inside GET request:", image_name);
-
-//       // replace spaces in image name with underscores
-
-//       let processed_image_name = "";
-
-//       for (let i=0; i <image_name.length; i++) {
-//         curr_letter = image_name[i];
-//         if (curr_letter == " "){
-//           curr_letter = "_";
-//         }
-//         processed_image_name += curr_letter;
-//         // console.log("curr letter: " + curr_letter, " and processed image name so far: " + processed_image_name);
-//       }
-
-//       // get md5 hash string from processed image name
-
-//       let hash_str = crypto.createHash('md5').update(processed_image_name).digest('hex');
-//       // console.log("hash_str: " + hash_str);
-
-//       // create image url from hash string and image name
-
-//       // "a" is the first character of the hash string
-
-//       let a = hash_str.charAt(0);
-
-//       // "b" is the second character of the hast string
-
-//       let b = hash_str.charAt(1);
-
-//       // create image url in this format: https://upload.wikimedia.org/wikipedia/commons/a/ab/image_name
-
-//       img_url = "https://commons.wikimedia.org/w/thumb.php?width=400&f=" + processed_image_name;
-//       // let big_img_url = "https://upload.wikimedia.org/wikipedia/commons/" + a + "/" + a + b + "/" + processed_image_name;
-
-//       // console.log("img url inside getImageName function: " + img_url);
-//       // console.log("img url inside getImageName function: " + img_url + " and big pic url: " + big_img_url);
-
-//     } catch (error) {
-//       console.log(error.response);
-//     }
-
-//     // console.log("image url outside of its GET request:", img_url);
-
-//     res.send(img_url);
-//   })();
-// });
 
 app.use(function(req,res){
   res.status(404);

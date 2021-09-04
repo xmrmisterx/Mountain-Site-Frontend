@@ -14,3 +14,36 @@ we don't have axios, so we have to "npm i axios" to install it. Let's add the gi
 -interesting, so now we are getting the address in use error, which I think we've gotten before but the website still worked when we
 deployed it, let's look at the previous notes and see what it says. Yeah, rereading our notes from last time, we did get this address in
 use, but when we deployed it, it worked, so, let's try to deploy it I guess
+-ok, so we're gonna test this in the heroku cloud, which means first we want to create a git repo for this, so a) "git init" b) "git add
+. " (this adds all the files, the 'add .' part) c) "git commit -m [commit message]" this will commit all the files that we just added,
+with the [commit message] being anything we want to say, such as "first commit"
+-ok, so next, we want to create a heroku app to deploy, so "heroku create". Next, our heroku tutorial website says to do "git push [app
+git address] master", but from what we remember, "master" is not the correct phrase, I think it was "main", but let's double check with
+our notes. Yeah, our memory was correct. So yeah, when we create the heroku app, it gives us the git address for the repo, so we need
+to save that , bc I'm not sure it's anywhere (actually, I think the format for that is "https://git.heroku.com/[app name].git", but yeah
+might be a good idea to save that info). Interesting, so we do "git push https://git.heroku.com/mighty-taiga-60726.git main" and we are
+getting these errors "error: src refspec main does not match any.
+error: failed to push some refs to 'https://git.heroku.com/mighty-taiga-60726.git'" Well, that's awkward, so the method we used previously
+didn't work, and we were brainstorming, and on a whim, tried "git push https://git.heroku.com/mighty-taiga-60726.git master" and that
+did work. Seriously, some WTF stuff, but yeah, master works now. Ok, it says it successfully deployed, so let's see if it works now. 
+- lol, we go to "https://mighty-taiga-60726.herokuapp.com/" and it says "internal server error", so that's new.
+-ok, so we want to go back and try to set up the local browser first, for testing purposes, since redeploying everytime we want to test
+something seems tiresome and unnecessary. When we set the port directly to 5125, it seems to work, so I guess we want to set the port
+directly to test, and change it to the other "||" code to deploy. When we do change it, now we get a no default engine specified for
+the home directory, which is interesting.
+-we thought maybe there was something wrong with our public folder, so we copied our styles and jpg files into the public folder, however,
+that didn't really fix it, let's look at the tutorials organization again. Hmmm... maybe we need express handlebars to render? We've 
+never rendered a page without having a views? From the little of handlebars that we remember, we need to install handlebars, or Required
+it, then put the pages inside a views folder, then we can "render.[page]". 
+-we can refer to CS290 sample code to see how handlebars work, or maybe watch the 12 min video and see if there's anything else in there
+that was not shown in the article
+-ok, so we watched the 12 min video, it was actually pretty good, girl is a good speaker, no ummmss... anyways, we noticed a couple of
+things. For one, the "dirname" actually apparently isn't supposed to be changed, and it's 2 dashes, so we need to change it from "mountain site frontend" back to "__dirName" and we were correct, public was a folder that was added, and we can put all the html and
+css in their as well. Also, she didn't say anything about this res.render business, so maybe it's just that that was wrong? there are no references to handlebars or anything
+-ok, so we put all the html into public, along with the current images and css files, now, let's rename this index.js to actually server.js, bc it makes more sense, and we currently have 2 different files named index
+-YES! so that worked, we went to each page and did the download, and everything works, and it's also not slow, so I think our uptimebot is doing it's job as well. We see in the output that we are getting errors each time we render, which is kind of disturbing, but the pages load, so I guess that's OK. Let's cut all these files from outside public and see if it still works, then we'll upload it and make
+sure it still works on the cloud.
+-ok, so before we upload this again, we want to go over what worked and what didn't, then see how we can remove this no default engine error that pops up every page. Alright, so first of all, res.render does work, even when we didn't have handlebars or anything like that. I think the main issue, and maybe index.js was just a side issue and more aesthetic than anything before the renaming, but yeah, the main issue is that we were using this code "app.use(express.static("~/Mountain_Site_FrontEnd" + "/public"));" and not understanding
+what it does and thinking that we needed to change "dirname", but dirname is the actual directory that we want to use, so changing it to "app.use(express.static(__dirname + "/public"));" was probably the biggest reason for everything working. Furthermore, I'm not sure if we put our index.html inside of the public folder before (I think we might have copied it in, but yeah)
+- alright, let's google and see if we can't find out how to remove these annoying " Error: No default engine was specified and no extension was provided." errors everytime we go to another page... ok, so one suggestion was to use the function "send" instead of "render", so let's try that. No, that didn't really help. We went to like 4 pages and got 8 of those errors, which is very excessive wtf. Hmmm... I don't think we can resolve this lol. I mean, it works, which I guess is fine, it just builds up a bunch of errors?
+-ok, so now let's add these files, commit them, and upload them and see what happens... actually, change back our port code, then upload to heroku
