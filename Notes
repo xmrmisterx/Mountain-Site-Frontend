@@ -51,3 +51,7 @@ what it does and thinking that we needed to change "dirname", but dirname is the
 -***Now, we need to create a front end and backend for the workout log, and just a front end for the SW fansite. Can we remove the proxy
 website since heroku is now calling itself? Bc apparently we only have a max of 5 free apps, and we need all 5 not including the proxy site. Let's test the code without the proxy site?
 -ok, good, so we don't seem to need the proxy site now, which is "https://warm-taiga-26874.herokuapp.com/" btw, in case we need to know which app to delete. So, let's delete them, change back to the code to the heroku port, and upload and make sure everything works again.
+-ok, so once this works, we can delete the proxy app from heroku, and also remove it from uptimebot as well. Alright, everything works, so that's good.
+-let's delete the uptimebot call for warm taiga, then delete that app from heroku, then set up our workout log front and back end, then our SW fansite front end
+-this fucking  uptimebot site, I literally can't find where to remove a monitor, fuking useless idiots, can't even do it after googling,
+I guess we can remove it and use a function?
