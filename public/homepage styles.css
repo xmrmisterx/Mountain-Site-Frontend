@@ -30,7 +30,7 @@
     color: white;
   }
 
-/* center home page text */
+/* Center home page text */
 
 h1 {
   text-align: center;
@@ -39,7 +39,7 @@ h1 {
   font-size: 80px;
 }
 
-/* center mountain images */
+/* Center mountain images */
 
 #Img {
   display: block;
@@ -48,7 +48,7 @@ h1 {
   width: 35%;
 }
 
-/* create background image that spans home page */
+/* Create background image that spans home page */
 
 html { 
   background: url(Mt._Kilimanjaro_12.2006.jpg) no-repeat center center fixed; 
@@ -58,7 +58,7 @@ html {
   background-size: cover;
 }
 
- /* make all text white */
+ /* Make all text white */
 
 body {
   color: white;
